@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Luana Martinez | Extensão de Cílios</title>
+  <style>
+    /* Estilos Gerais para o Corpo da Página */
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #fff0f5;
+      color: #333;
+    }
+
+    /* Estilos para o Cabeçalho (Header) */
+    header {
+      background-color: #ff69b4;
+      color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+
+    /* Estilos para os Links de Navegação (Nav) */
+    nav a {
+      margin: 0 15px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    /* Estilos para as Seções da Página (Sobre, Portfólio, Serviços, Contato) */
+    section {
+      padding: 2rem;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    /* ====================================================================== */
+    /* ESTILOS ESPECÍFICOS PARA O PORTFÓLIO (IMAGEM + CAIXA DE TEXTO) */
+    /* ====================================================================== */
+
+    /* 1. Container para cada LINHA de item do portfólio (a imagem e sua caixa de texto) */
+    .portfolio-item-row {
+        display: flex; /* ATIVA O FLEXBOX: Faz com que os elementos internos (imagem e .portfolio-text-content) fiquem LADO A LADO */
+        align-items: center; /* Alinha a imagem e a caixa de texto verticalmente no CENTRO da linha */
+        gap: 25px; /* Define o ESPAÇAMENTO entre a imagem e a caixa de texto */
+        margin-bottom: 30px; /* Adiciona um espaço na parte INFERIOR de cada linha para separá-la da próxima */
+        flex-wrap: wrap; /* MUITO IMPORTANTE: Permite que os elementos (imagem e texto) QUEBREM PARA A PRÓXIMA LINHA se não houver espaço suficiente na tela (útil para celulares) */
+
+        /* Estilo da "caixa maior" que envolve a imagem e o texto juntos */
+        background-color: #ffffff; /* Fundo BRANCO para o bloco completo de cada item do portfólio */
+        padding: 20px; /* Espaçamento interno dentro desta caixa */
+        border-radius: 12px; /* Cantos arredondados para a caixa */
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08); /* Sombra suave para a caixa, dando um efeito de elevação */
+    }
+
+    /* 2. Estilo para as IMAGENS dentro de cada .portfolio-item-row */
+    .portfolio-item-row img {
+       width: 100%; /* A imagem tentará ocupar 100% do espaço DISPONÍVEL para ela dentro do flexbox */
+       max-width: 150px; /* ESTE É O PONTO CHAVE: A imagem NUNCA será maior que 150px de largura, mesmo que haja mais espaço. É o seu tamanho desejado! */
+       height: auto; /* Garante que a altura da imagem se ajuste automaticamente para manter a proporção (não a deforma) */
+      border-radius: 8px; /* Cantos arredondados para a imagem */
+      box-shadow: 0 0 8px rgba(0,0,0,0.08); /* Sombra suave para a imagem em si */
+   }
+
+    /* 3. Estilo para o CONTEÚDO DE TEXTO (a sua "caixa de texto" que fica ao lado da imagem) */
+    .portfolio-text-content {
+        flex: 1; /* Faz esta div OCUPAR TODO O ESPAÇO RESTANTE na linha, depois que a imagem pegou o seu espaço fixo de 150px. */
+        line-height: 1.6; /* Espaçamento entre linhas para facilitar a leitura */
+    }
+
+    /* Estilo para o TÍTULO (<h3>) dentro da caixa de texto */
+    .portfolio-text-content h3 {
+        margin-top: 0; /* Remove a margem superior padrão do navegador para o h3 */
+        margin-bottom: 10px; /* Adiciona um espaço abaixo do título, antes do parágrafo */
+        color: #ff69b4; /* Define a cor do título (rosa vibrante) */
+        font-size: 1.4em; /* Define o tamanho da fonte do título (maior que o texto normal) */
+    }
+
+    /* Estilo para o PARÁGRAFO (<p>) dentro da caixa de texto */
+    .portfolio-text-content p {
+        margin-bottom: 0; /* Remove a margem inferior padrão do navegador para o parágrafo */
+    }
+
+    /* ====================================================================== */
+    /* FIM DOS ESTILOS ESPECÍFICOS PARA O PORTFÓLIO */
+    /* ====================================================================== */
+
+    /* Estilos para o Rodapé (Footer) */
+    footer {
+      background-color: #ff69b4;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    /* Estilos para a Imagem de Assinatura no Rodapé */
+    footer img {
+      max-width: 100px;
+      height: auto;
+      display: block;
+      margin: 10px auto 0 auto;
+    }
+
+    /* Estilos para os Botões de Contato (WhatsApp e Instagram) */
+    .btn-contato {
+      display: inline-block;
+      margin: 10px 10px 0 0;
+      padding: 10px 20px;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    /* Cor específica para o botão do WhatsApp */
+    .btn-whats {
+      background-color: #25D366;
+    }
+
+    /* Cor específica para o botão do Instagram */
+    .btn-insta {
+      background-color: #C13584;
+    }
+
+    /* ====================================================================== */
+    /* MEDIA QUERY PARA RESPONSIVIDADE (Telas menores como celulares) */
+    /* ====================================================================== */
+
+    /* Regras que se aplicam quando a largura da tela é no máximo 700 pixels */
+@media (max-width: 700px) {
+        /* Para cada linha de item do portfólio, muda o comportamento */
+        .portfolio-item-row {
+            flex-direction: column; /* Faz a imagem e o texto ficarem UM EMBAIXO DO OUTRO */
+            align-items: flex-start; /* Alinha a imagem e a caixa de texto à ESQUERDA quando estão empilhados */
+            padding: 15px; /* Ajusta o espaçamento interno do bloco em telas menores */
+        }
+        /* Para a IMAGEM quando a tela é pequena */
+        .portfolio-item-row img {
+            margin-bottom: 15px; /* Adiciona um espaço abaixo da imagem quando ela está em cima do texto */
+            max-width: 180px; /* Aumenta um pouco a largura máxima da imagem para não ficar minúscula no celular */
+            align-self: center; /* Centraliza a imagem horizontalmente no espaço disponível quando está em coluna */
+        }
+        /* Para a CAIXA DE TEXTO quando a tela é pequena */
+        .portfolio-text-content {
+            width: 100%; /* A caixa de texto ocupa 100% da largura do contêiner */
+            text-align: left; /* Garante que o texto dentro da caixa esteja alinhado à esquerda */
+        }
+
+        /* AJUSTE PARA SERVIÇOS EM TELAS PEQUENAS */
+        #servicos ul {
+            flex-direction: column; /* Faz os itens ficarem um abaixo do outro */
+            align-items: center; /* Centraliza os itens quando estão em coluna */
+            gap: 15px; /* Ajusta o espaçamento para telas menores */
+        }
+
+        #servicos ul li {
+            width: 100%; /* Ocupa a largura total disponível */
+            max-width: 350px; /* Define uma largura máxima para não ficarem gigantes em tablets */
+            flex-basis: auto; /* Reseta a base flex para o comportamento de coluna */
+            margin-bottom: 0; /* Já deve estar zero, mas para garantir */
+        }
+    }
+    /* ====================================================================== */
+    /* NOVOS ESTILOS PARA CAIXAS NA SEÇÃO 'SERVIÇOS' */
+    /* ====================================================================== */
+
+/* ====================================================================== */
+    /* NOVOS ESTILOS PARA CAIXAS NA SEÇÃO 'SERVIÇOS' */
+    /* ====================================================================== */
+
+    /* Estilos para a seção Serviços (cada item será uma "caixa") */
+    #servicos ul {
+        list-style: none; /* Remove os marcadores de lista padrão (bolinhas, etc.) */
+        padding: 0; /* Remove o padding padrão da lista */
+        margin: 20px auto; /* Centraliza o ul na página horizontalmente */
+        max-width: 900px; /* Garante que o ul não fique mais largo que o conteúdo principal */
+        
+        /* PROPRIEDADES PARA FLEXBOX (3 COLUNAS): */
+        display: flex; /* Transforma a ul em um contêiner flexível */
+        flex-wrap: wrap; /* Permite que os itens "quebrem" para a próxima linha */
+        gap: 20px; /* Espaçamento entre os itens (tanto horizontal quanto vertical) */
+        justify-content: center; /* Centraliza os itens na linha */
+    }
+
+    #servicos ul li {
+        background-color: #ffffff; /* Fundo branco para cada item de serviço (criando a "caixa") */
+        padding: 15px 20px; /* Espaçamento interno dentro de cada caixa de serviço */
+        border-radius: 8px; /* Cantos arredondados para as caixas */
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05); /* Sombra suave para dar profundidade */
+        margin-bottom: 0; /* IMPORTANTE: Zere o margin-bottom para o gap funcionar */
+
+        /* PROPRIEDADES PARA O TAMANHO DOS ITENS: */
+        flex-basis: calc(33.333% - 20px); /* Tenta ocupar 1/3 da largura menos o gap */
+        max-width: calc(33.333% - 20px); /* Garante que não ultrapasse 1/3 */
+        min-width: 260px; /* Ajustei este valor para 260px, você pode testar 250px se precisar */
+        box-sizing: border-box; /* Garante que padding e border sejam incluídos no width */
+        text-align: center; /* Centraliza o texto dentro de cada caixa de serviço */
+    }
+    /* (Mantenha o restante dos estilos para #servicos ul li strong, p, .preco, .manutencao, .observacao) */
+    #servicos ul li strong {
+        color: #ff69b4; /* Cor rosa para o nome do serviço (ex: Fio a fio) */
+        font-size: 1.2em; /* Deixa o nome do serviço um pouco maior que o texto normal */
+        display: block; /* Garante que o nome do serviço fique em sua própria linha */
+        margin-bottom: 5px; /* Espaço abaixo do nome do serviço e antes da descrição */
+    }
+
+    #servicos ul li p { /* Estilo para a descrição do serviço */
+        margin-bottom: 0; /* Remove a margem inferior padrão do parágrafo */
+        line-height: 1.5; /* Espaçamento entre as linhas da descrição */
+    }
+
+    #servicos ul li .preco {
+        font-weight: bold; /* Preço em negrito */
+        color: #333; /* Cor mais escura para o preço */
+        display: block; /* Garante que o preço fique em sua própria linha */
+        margin-top: 10px; /* Espaço acima do preço */
+        font-size: 1.1em; /* Tamanho um pouco maior para o preço */
+    }
+
+    #servicos ul li .manutencao {
+        font-style: italic; /* Manutenção em itálico */
+        color: #666; /* Cor cinza para a manutenção */
+        font-size: 0.95em; /* Fonte um pouco menor para a manutenção */
+        display: block; /* Garante que a manutenção fique em sua própria linha */
+    }
+
+    #servicos .observacao {
+        font-size: 0.9em; /* Tamanho do texto das observações (as frases com *) */
+        color: #666; /* Cor mais suave para as observações */
+        text-align: center; /* Centraliza as observações */
+        margin-bottom: 10px; /* Espaço abaixo de cada observação */
+    }
+</style>
+</head>
+<body>
+
+  <header>
+    <h1>Luana Martinez 🎀</h1>
+    <p>Design de cílios e sobrancelhas</p>
+    <nav>
+      <a href="#sobre">Sobre</a>
+      <a href="#portfolio">Portfólio</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#contato">Agendamento</a>
+    </nav>
+  </header>
+
+  <section id="sobre">
+    <h2>🎀 Sobre</h2>
+    <p>Sou a Luana Martinez, especialista em extensão de cílios, brow lamination, lash lift e design de sobrancelhas. Atendimento 100% personalizado, focado em realçar sua beleza com muito carinho!</p>
+  </section>
+
+<section id="portfolio" class="portfolio">  
+           <h2>✨ Portfólio</h2>
+        <p><strong><i>Veja Alguns dos meus trabalhos abaixo:</i></strong></p>
+      
+
+    <div class="portfolio-item-row">
+        <img src="Fox1.jpg"  alt="Cílios Efeito Fox Eyes" />
+        <div class="portfolio-text-content">
+            <h3><strong><em>Efeito Fox Eyes</em></strong></h3>
+            <p>
+                Este efeito alonga e eleva o olhar, criando um visual mais sensual e puxado, ideal para quem busca um estilo ousado e marcante.
+            </p>
+        </div>
+    </div>
+
+    <div class="portfolio-item-row">
+        <img src="Whispy1.jpg" alt="Cílios Efeito Whispy" />
+        <div class="portfolio-text-content">
+            <h3><strong><em>Efeito Whispy</em></strong></h3>
+            <p>
+                Conhecido por seu volume mais natural e textura leve, caracteriza-se por picos de fios maiores misturados com cílios menores, criando um visual arejado e delicado.
+            </p>
+        </div>
+    </div>
+
+    <div class="portfolio-item-row">
+        <img src="Egipcio1.jpg" alt="Cílios Efeito Egípcio" />
+        <div class="portfolio-text-content">
+            <h3><strong><em>Efeito Egípcio</em></strong></h3>
+            <p>
+                Um estilo sofisticado que combina volume e alongamento, com um mapeamento que realça o canto externo dos olhos e se estende sutilmente, conferindo um ar misterioso e elegante.
+            </p>
+        </div>
+    </div>
+
+</section>
+
+<section id="servicos">
+    <h2>💼 Serviços</h2>
+    
+    <p class="observacao">
+        *TODAS AS EXTENSÕES SÃO ADAPTÁVEIS PARA CADA FORMATO DE OLHO*
+    </p>
+    <p class="observacao">
+        *A CLIENTE ESCOLHE COMO QUER O TAMANHO E O MODELO*
+    </p>
+
+    <ul>
+        <li>
+            <strong>Fio a fio</strong>
+            <p>Modelo leve e natural, realça o olhar sem pesar.</p>
+            <span class="preco">R$ 100,00</span>
+            <span class="manutencao">MANUTENÇÃO: R$ 65,00</span>
+        </li>
+        <li>
+            <strong>Volume Egípcio</strong>
+            <p>Volume mais preenchido, porém delicado, opções no fio preto e marrom.</p>
+            <span class="preco">R$ 110,00</span>
+            <span class="manutencao">MANUTENÇÃO: R$ 80,00</span>
+        </li>
+        <li>
+            <strong>Volume Wispy</strong>
+            <p>Volume híbrido, é delicado e abre o olhar.</p>
+            <span class="preco">R$ 120,00</span>
+            <span class="manutencao">MANUTENÇÃO: R$ 85,00</span>
+        </li>
+        <li>
+            <strong>Volume Kardashian</strong>
+            <p>Volume mais cheio que abre o olhar, pra quem gosta de cílios volumosos.</p>
+            <span class="preco">R$ 125,00</span>
+            <span class="manutencao">MANUTENÇÃO: R$ 90,00</span>
+        </li>
+        <li>
+            <strong>Lash Lift</strong>
+            <span class="preco">R$ 90,00</span>
+        </li>
+        <li>
+            <strong>Design de sobrancelhas</strong>
+            <span class="preco">R$ 40,00</span>
+        </li>
+    </ul>
+</section>
+
+  <section id="contato">
+    <h2>📲 Agende seu horário</h2>
+    <p>Você pode agendar pelo WhatsApp ou Instagram:</p>
+    <a class="btn-contato btn-whats" href="https://wa.me/5515996250180" target="_blank">Chamar no WhatsApp</a>
+    <a class="btn-contato btn-insta" href="https://instagram.com/luamartinez_lash" target="_blank">Agendar pelo Instagram</a>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Luana Martinez | Todos os direitos reservados.</p>
+    <p>Produzido por:</p>
+    <img src="Assinatura.png" alt="Assinatura"/>
+  </footer>
+
+</body>
+</html>
